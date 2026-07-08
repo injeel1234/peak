@@ -48,7 +48,7 @@ body {
 
   text-align: center;
 
-  margin-top: 120px;
+  margin-top: 80px;
 }
 
 .hero h1 {
@@ -59,7 +59,7 @@ body {
 .hero p {
   max-width: 650px;
 
-  margin-top: 30px;
+  margin-top: 20px;
 
   font-size: 1.2rem;
 
@@ -69,7 +69,7 @@ body {
 }
 
 button {
-  margin-top: 40px;
+  margin-top: 28px;
 
   background: #3b82f6;
 
@@ -88,7 +88,117 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
+.hero button:hover {
   background: #2563eb;
   transform: translateY(-2px);
+}
+
+.features {
+  margin-top: 3px;
+  padding: 100px 10%;
+  text-align: center;
+  color: white;
+  background: transparent;
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: white;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.feature-card {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+
+
+.feature-card h3 {
+  margin-bottom: 15px;
+  color: #0f172a;
+}
+
+.feature-card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .app {
+    padding: 30px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+.how-it-works {
+  padding: 40px 10% 100px;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 2.5rem;
+  margin-bottom: 70px;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.step {
+  max-width: 300px;
+}
+
+.step-number {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 25px;
+
+  background: #3b82f6;
+  color: white;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.step h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.step p {
+  color: #cbd5e1;
+  line-height: 1.7;
 }

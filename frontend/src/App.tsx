@@ -79,6 +79,60 @@ function App() {
     </div>
   </div>
 </section>
+<section className="dashboard">
+  <h2>Your Personal Dashboard</h2>
+
+  <p>
+    Everything you need to understand your energy, productivity,
+    and caffeine habits in one place.
+  </p>
+
+  <div className="dashboard-card">
+
+    <div className="dashboard-row">
+      <span>⚡ Energy Score</span>
+      <strong>87%</strong>
+    </div>
+
+    <div className="dashboard-row">
+      <span>😴 Sleep</span>
+      <strong>7h 42m</strong>
+    </div>
+
+    <div className="dashboard-row">
+      <span>☕ Today's Caffeine</span>
+      <strong>180mg</strong>
+    </div>
+
+    <div className="dashboard-row">
+      <span>🎯 Best Focus Time</span>
+      <strong>2:00 PM – 5:00 PM</strong>
+    </div>
+
+    <div className="recommendation">
+      <h3>AI Recommendation</h3>
+
+      <p>
+        Skip another coffee after 4 PM to improve your sleep
+        and maintain higher energy tomorrow.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section className="cta">
+  <h2>Ready to Take Control of Your Energy?</h2>
+
+  <p>
+    Start tracking your caffeine and discover your most productive
+    hours with AI.
+  </p>
+
+  <button>Get Started</button>
+</section>
+<footer className="footer">
+  <p>© 2026 Peak. Built with React.</p>
+</footer>
     </main>
   );
 }

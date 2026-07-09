@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 
 function Dashboard() {
   const [caffeine, setCaffeine] = useState(180);
   const [sleep, setSleep] = useState(7.5);
   const [energy, setEnergy] = useState(87);
+
+  useEffect(() => {
+  const savedData = localStorage.getItem("peakData");
+
+  if (savedData) {
+    const data = JSON.parse(savedData);
+
+    setCaffeine(data.caffeine);
+    setSleep(data.sleep);
+    setEnergy(data.energy);
+  }
+}, []);
 
   // AI Insights
   const insights: string[] = [];
@@ -80,6 +92,58 @@ function Dashboard() {
     focusTime = "Later today";
   }
 
+  function saveData() {
+  const now = new Date();
+
+  const newEntry = {
+    date: now.toLocaleDateString(),
+    time: now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    caffeine,
+    sleep,
+    energy,
+  };
+
+  // Save the latest values
+  localStorage.setItem(
+    "peakData",
+    JSON.stringify({
+      caffeine,
+      sleep,
+      energy,
+    })
+  );
+
+  // Load existing history
+  const history = JSON.parse(
+    localStorage.getItem("peakHistory") || "[]"
+  );
+
+  // Check if today's date already exists
+  const existingIndex = history.findIndex(
+    (entry: any) => entry.date === newEntry.date
+  );
+
+  if (existingIndex !== -1) {
+    // Update today's record
+    history[existingIndex] = newEntry;
+  } else {
+    // Add a new record
+    history.push(newEntry);
+  }
+
+  // Save updated history
+  localStorage.setItem(
+    "peakHistory",
+    JSON.stringify(history)
+  );
+
+  alert("Today's data has been saved!");
+
+  console.log(history);
+}
   return (
     <main className="dashboard-page">
       <h1>Your Dashboard</h1>
@@ -146,8 +210,11 @@ function Dashboard() {
 
         <p>{energy}%</p>
 
-        <button className="save-btn">
-          Save Today's Data
+        <button
+        className="save-btn"
+        onClick={saveData}
+        >
+        Save Today's Data
         </button>
       </div>
     </main>

@@ -1,3 +1,7 @@
+/* ===========================
+   Global Styles
+=========================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +14,16 @@ body {
   font-family: Inter, sans-serif;
 }
 
+/* ===========================
+   Home Page
+=========================== */
+
 .app {
   min-height: 100vh;
   padding: 40px 80px;
 }
+
+/* Navbar */
 
 .navbar {
   display: flex;
@@ -34,20 +44,20 @@ body {
   color: white;
   text-decoration: none;
   opacity: 0.8;
+  transition: 0.3s;
 }
 
 .nav-links a:hover {
   opacity: 1;
 }
 
+/* Hero */
+
 .hero {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
   text-align: center;
-
   margin-top: 80px;
 }
 
@@ -58,53 +68,43 @@ body {
 
 .hero p {
   max-width: 650px;
-
   margin-top: 20px;
-
   font-size: 1.2rem;
-
   color: #cbd5e1;
-
   line-height: 1.8;
 }
 
+/* Buttons */
+
 button {
   margin-top: 28px;
-
   background: #3b82f6;
-
   color: white;
-
   border: none;
-
   padding: 18px 36px;
-
   border-radius: 12px;
-
   font-size: 1rem;
-
   cursor: pointer;
-
   transition: 0.3s;
 }
 
-.hero button:hover {
+button:hover {
   background: #2563eb;
   transform: translateY(-2px);
 }
 
+/* ===========================
+   Features
+=========================== */
+
 .features {
-  margin-top: 3px;
   padding: 100px 10%;
   text-align: center;
-  color: white;
-  background: transparent;
 }
 
 .features h2 {
   font-size: 2.5rem;
   margin-bottom: 60px;
-  color: white;
 }
 
 .feature-grid {
@@ -115,47 +115,32 @@ button {
 
 .feature-card {
   background: white;
+  color: #0f172a;
   padding: 35px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: transform 0.3s;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  transition: .3s;
 }
 
 .feature-card:hover {
   transform: translateY(-10px);
 }
 
-
-
 .feature-card h3 {
   margin-bottom: 15px;
-  color: #0f172a;
 }
 
 .feature-card p {
   color: #64748b;
   line-height: 1.6;
 }
-@media (max-width: 768px) {
-  .app {
-    padding: 30px 20px;
-  }
 
-  .hero h1 {
-    font-size: 2.8rem;
-  }
+/* ===========================
+   How It Works
+=========================== */
 
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 20px;
-  }
-}
 .how-it-works {
-  padding: 40px 10% 100px;
+  padding: 50px 10% 100px;
   text-align: center;
 }
 
@@ -179,16 +164,12 @@ button {
   width: 70px;
   height: 70px;
   margin: 0 auto 25px;
-
   background: #3b82f6;
   color: white;
-
   border-radius: 50%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 1.8rem;
   font-weight: bold;
 }
@@ -202,8 +183,13 @@ button {
   color: #cbd5e1;
   line-height: 1.7;
 }
+
+/* ===========================
+   Landing Dashboard
+=========================== */
+
 .dashboard {
-  margin-top: 30px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -217,12 +203,11 @@ button {
   margin: 0 auto 60px;
   color: #cbd5e1;
   line-height: 1.7;
-  font-size: 1.1rem;
 }
 
 .dashboard-card {
   max-width: 750px;
-  margin: 0 auto;
+  margin: auto;
   background: #1e293b;
   border-radius: 24px;
   padding: 40px;
@@ -232,16 +217,11 @@ button {
 .dashboard-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
   padding: 20px 0;
-
   border-bottom: 1px solid #334155;
-
-  font-size: 1.1rem;
 }
 
-.dashboard-row:last-of-type {
+.dashboard-row:last-child {
   border-bottom: none;
 }
 
@@ -250,26 +230,27 @@ button {
 }
 
 .recommendation {
-  margin-top: 35px;
-
+  margin-top: 30px;
   background: #0f172a;
-
   padding: 25px;
-
   border-radius: 18px;
-
   text-align: left;
 }
 
 .recommendation h3 {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #60a5fa;
 }
 
 .recommendation p {
   color: #cbd5e1;
-  line-height: 1.7;
+  line-height: 1.6;
 }
+
+/* ===========================
+   CTA
+=========================== */
+
 .cta {
   text-align: center;
   padding: 120px 10%;
@@ -277,32 +258,31 @@ button {
 
 .cta h2 {
   font-size: 3rem;
-  margin-bottom: 20px;
 }
 
 .cta p {
+  margin: 20px auto;
   max-width: 650px;
-  margin: 0 auto;
   color: #cbd5e1;
-  font-size: 1.15rem;
   line-height: 1.8;
 }
 
-.cta button {
-  margin-top: 35px;
-}
 .footer {
   text-align: center;
   padding: 40px;
   color: #94a3b8;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 
-/* Dashboard Page */
+/* ===========================
+   Dashboard Page
+=========================== */
 
 .dashboard-page {
   min-height: 100vh;
-  padding: 50px 80px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 40px;
 }
 
 .dashboard-page h1 {
@@ -315,23 +295,22 @@ button {
   font-size: 1.1rem;
 }
 
+/* Stats */
+
 .stats-grid {
   margin-top: 50px;
-
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 25px;
 }
 
 .stat-card {
   background: white;
   color: #0f172a;
-
-  padding: 30px;
-
+  padding: 35px;
   border-radius: 20px;
-
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  box-shadow: 0 12px 25px rgba(0,0,0,.1);
 }
 
 .stat-card h3 {
@@ -343,16 +322,104 @@ button {
   font-weight: bold;
 }
 
+/* AI Card */
+
 .ai-card {
   margin-top: 40px;
-
-  background: #3b82f6;
-
+  background: linear-gradient(135deg,#3b82f6,#2563eb);
   padding: 35px;
-
   border-radius: 20px;
+  text-align: center;
 }
 
 .ai-card h2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.ai-card p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* Update Form */
+
+.input-section {
+  margin: 50px auto 0;
+  max-width: 750px;
+  background: white;
+  color: #0f172a;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.2);
+}
+
+.input-section h2 {
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-section label {
+  display: block;
+  color: #0f172a;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 14px;
+  background: #f8fafc;
+  border: 2px solid #dbeafe;
+  border-radius: 10px;
+  color: #0f172a;
+  font-size: 1rem;
+  transition: .2s;
+}
+
+.input-section input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.input-section input[type="range"] {
+  padding: 0;
+  background: transparent;
+  margin-top: 15px;
+}
+
+.input-section p {
+  margin-top: 15px;
+  text-align: center;
+  color: #0f172a;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+  .app {
+    padding: 30px 20px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.7rem;
+  }
+
+  .feature-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-page {
+    padding: 30px 20px;
+  }
 }

@@ -297,3 +297,62 @@ button {
   color: #94a3b8;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
+
+/* Dashboard Page */
+
+.dashboard-page {
+  min-height: 100vh;
+  padding: 50px 80px;
+}
+
+.dashboard-page h1 {
+  font-size: 3rem;
+}
+
+.dashboard-subtitle {
+  margin-top: 10px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.stats-grid {
+  margin-top: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.stat-card {
+  background: white;
+  color: #0f172a;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+  margin-bottom: 15px;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ai-card {
+  margin-top: 40px;
+
+  background: #3b82f6;
+
+  padding: 35px;
+
+  border-radius: 20px;
+}
+
+.ai-card h2 {
+  margin-bottom: 15px;
+}

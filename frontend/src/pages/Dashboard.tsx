@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../App.css";
 
@@ -7,28 +8,28 @@ function Dashboard() {
   const [energy, setEnergy] = useState(87);
 
   useEffect(() => {
-  const savedData = localStorage.getItem("peakData");
+    const savedData = localStorage.getItem("peakData");
 
-  if (savedData) {
-    const data = JSON.parse(savedData);
+    if (savedData) {
+      const data = JSON.parse(savedData);
 
-    setCaffeine(data.caffeine);
-    setSleep(data.sleep);
-    setEnergy(data.energy);
-  }
-}, []);
+      setCaffeine(data.caffeine);
+      setSleep(data.sleep);
+      setEnergy(data.energy);
+    }
+  }, []);
 
-  // AI Insights
+  // ---------------- AI Insights ----------------
+
   const insights: string[] = [];
 
-  // Overall analysis
   if (sleep >= 8 && sleep <= 12 && caffeine <= 200 && energy >= 80) {
     insights.push(
-      "🌟 Excellent balance! Your sleep, caffeine intake, and energy levels are all in a healthy range."
+      "🌟 Excellent balance! Your sleep, caffeine intake and energy are all in a healthy range."
     );
   } else if (sleep < 8 && caffeine > 300) {
     insights.push(
-      "⚠️ You're relying on high caffeine despite getting less than 8 hours of sleep. Prioritise rest today if possible."
+      "⚠️ You're relying on high caffeine despite getting little sleep. Prioritise rest today."
     );
   }
 
@@ -39,7 +40,7 @@ function Dashboard() {
     );
   } else if (sleep > 12) {
     insights.push(
-      "🛌 More than 12 hours of sleep may indicate poor sleep quality or fatigue."
+      "🛌 More than 12 hours of sleep may indicate fatigue or poor sleep quality."
     );
   } else {
     insights.push("✅ Your sleep duration is in the optimal range.");
@@ -69,17 +70,18 @@ function Dashboard() {
     );
   } else if (energy >= 50) {
     insights.push(
-      "🙂 Your energy is moderate. Consider a short walk or drinking some water."
+      "🙂 Your energy is moderate. Consider taking a short walk or drinking some water."
     );
   } else {
     insights.push(
-      "⚡ Your energy is low. A break or short nap may help you recharge."
+      "⚡ Your energy is low. A short break or nap may help you recharge."
     );
   }
 
   const recommendation = insights.join(" ");
 
-  // Dynamic Focus Time
+  // ---------------- Focus Time ----------------
+
   let focusTime = "2 PM – 5 PM";
 
   if (energy >= 80 && sleep >= 8 && caffeine <= 200) {
@@ -92,58 +94,49 @@ function Dashboard() {
     focusTime = "Later today";
   }
 
+  // ---------------- Save Data ----------------
+
   function saveData() {
-  const now = new Date();
+    const now = new Date();
 
-  const newEntry = {
-    date: now.toLocaleDateString(),
-    time: now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-    caffeine,
-    sleep,
-    energy,
-  };
-
-  // Save the latest values
-  localStorage.setItem(
-    "peakData",
-    JSON.stringify({
+    const newEntry = {
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
       caffeine,
       sleep,
       energy,
-    })
-  );
+    };
 
-  // Load existing history
-  const history = JSON.parse(
-    localStorage.getItem("peakHistory") || "[]"
-  );
+    // Save latest values
+    localStorage.setItem(
+      "peakData",
+      JSON.stringify({
+        caffeine,
+        sleep,
+        energy,
+      })
+    );
 
-  // Check if today's date already exists
-  const existingIndex = history.findIndex(
-    (entry: any) => entry.date === newEntry.date
-  );
+    // Save history
+    const history = JSON.parse(
+      localStorage.getItem("peakHistory") || "[]"
+    );
 
-  if (existingIndex !== -1) {
-    // Update today's record
-    history[existingIndex] = newEntry;
-  } else {
-    // Add a new record
     history.push(newEntry);
+
+    localStorage.setItem(
+      "peakHistory",
+      JSON.stringify(history)
+    );
+
+    alert("Today's data has been saved!");
+
+    console.log(history);
   }
 
-  // Save updated history
-  localStorage.setItem(
-    "peakHistory",
-    JSON.stringify(history)
-  );
-
-  alert("Today's data has been saved!");
-
-  console.log(history);
-}
   return (
     <main className="dashboard-page">
       <h1>Your Dashboard</h1>
@@ -210,12 +203,20 @@ function Dashboard() {
 
         <p>{energy}%</p>
 
-        <button
-        className="save-btn"
-        onClick={saveData}
-        >
-        Save Today's Data
-        </button>
+        <div className="button-group">
+          <button
+            className="save-btn"
+            onClick={saveData}
+          >
+            Save Today's Data
+          </button>
+
+          <Link to="/history">
+            <button className="history-btn">
+              View History
+            </button>
+          </Link>
+        </div>
       </div>
     </main>
   );

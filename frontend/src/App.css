@@ -423,3 +423,76 @@ button:hover {
     padding: 30px 20px;
   }
 }
+/* ===========================
+   History Page
+=========================== */
+
+.history-page {
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 30px;
+  text-align: center;
+}
+
+.history-page h1 {
+  font-size: 4rem;
+}
+
+.history-subtitle {
+  margin-top: 15px;
+  margin-bottom: 50px;
+  color: #cbd5e1;
+  font-size: 1.2rem;
+}
+
+.history-card {
+  max-width: 500px;
+  margin: 30px auto;
+  background: white;
+  color: #0f172a;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
+  transition: 0.25s;
+}
+
+.history-card:hover {
+  transform: translateY(-5px);
+}
+
+.history-card h3 {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.history-time {
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.history-card hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 20px 0;
+}
+
+.history-card p {
+  margin: 12px 0;
+  font-size: 1.1rem;
+}
+
+/* Dashboard Buttons */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.save-btn,
+.history-btn {
+  min-width: 190px;
+}

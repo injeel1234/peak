@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
 import "../App.css";
+
 
 interface HistoryEntry {
   date: string;
@@ -55,6 +66,48 @@ function Analytics() {
     totalEntries > 0
       ? Math.min(...history.map((item) => item.energy))
       : 0;
+
+      <div className="chart-card">
+  <h2>📈 Productivity Trends</h2>
+
+  <ResponsiveContainer width="100%" height={400}>
+    <LineChart data={history}>
+      <CartesianGrid strokeDasharray="3 3" />
+
+      <XAxis dataKey="time" />
+
+      <YAxis />
+
+      <Tooltip />
+
+      <Legend />
+
+      <Line
+        type="monotone"
+        dataKey="energy"
+        stroke="#3b82f6"
+        strokeWidth={3}
+        name="Energy (%)"
+      />
+
+      <Line
+        type="monotone"
+        dataKey="sleep"
+        stroke="#10b981"
+        strokeWidth={3}
+        name="Sleep (hrs)"
+      />
+
+      <Line
+        type="monotone"
+        dataKey="caffeine"
+        stroke="#f59e0b"
+        strokeWidth={3}
+        name="Caffeine (mg)"
+      />
+    </LineChart>
+  </ResponsiveContainer>
+</div>
 
   return (
     <main className="analytics-page">

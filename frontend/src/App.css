@@ -554,3 +554,20 @@ button:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===========================
+   Charts
+=========================== */
+
+.chart-card {
+  margin-top: 50px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
+}
+
+.chart-card h2 {
+  color: #0f172a;
+  margin-bottom: 30px;
+}

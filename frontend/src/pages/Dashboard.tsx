@@ -203,6 +203,13 @@ function Dashboard() {
 
         <p>{energy}%</p>
 
+
+        <Link to="/analytics">
+    <button className="analytics-btn">
+     View Analytics
+    </button>
+        </Link>
+
         <div className="button-group">
           <button
             className="save-btn"

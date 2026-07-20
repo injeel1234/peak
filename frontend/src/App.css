@@ -756,3 +756,9 @@ body.dark .analytics-card {
 body.dark .analytics-card small {
   color: #cbd5e1;
 }
+.error-message {
+  margin-top: 20px;
+  color: #ef4444;
+  font-weight: 600;
+  text-align: center;
+}

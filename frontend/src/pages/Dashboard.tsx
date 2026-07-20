@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "../App.css";
+import "./App.css";
 
 function Dashboard() {
   const [caffeine, setCaffeine] = useState<number | "">("");
   const [sleep, setSleep] = useState<number | "">("");
   const [energy, setEnergy] = useState(50);
+const [error, setError] = useState("");
 
   useEffect(() => {
     const savedData = localStorage.getItem("peakData");
@@ -23,18 +24,25 @@ function Dashboard() {
 
   const insights: string[] = [];
 
+if (caffeine === "" || sleep === "") {
+  insights.push(
+    "📝 Enter today's sleep and caffeine values to receive personalised AI insights."
+  );
+} else {
+
+  // Overall analysis
   if (
-    Number(sleep) >= 8 &&
-    Number(sleep) <= 12 &&
-    Number(caffeine) <= 200 &&
+    sleep >= 8 &&
+    sleep <= 12 &&
+    caffeine <= 200 &&
     energy >= 80
   ) {
     insights.push(
       "🌟 Excellent balance! Your sleep, caffeine intake and energy are all in a healthy range."
     );
   } else if (
-    Number(sleep) < 8 &&
-    Number(caffeine) > 300
+    sleep < 8 &&
+    caffeine > 300
   ) {
     insights.push(
       "⚠️ You're relying on high caffeine despite getting little sleep. Prioritise rest today."
@@ -42,28 +50,30 @@ function Dashboard() {
   }
 
   // Sleep
-
-  if (Number(sleep) < 8) {
+  if (sleep < 8) {
     insights.push(
       "😴 You slept less than the recommended amount. Aim for at least 8 hours tonight."
     );
-  } else if (Number(sleep) > 12) {
+  } else if (sleep > 12) {
     insights.push(
       "🛌 More than 12 hours of sleep may indicate fatigue or poor sleep quality."
     );
   } else {
-    insights.push("✅ Your sleep duration is in the optimal range.");
+    insights.push(
+      "✅ Your sleep duration is in the optimal range."
+    );
   }
 
   // Caffeine
-
-  if (Number(caffeine) === 0) {
+  if (caffeine === 0) {
     insights.push(
       "☕ No caffeine logged today. Great if you're maintaining your energy naturally!"
     );
-  } else if (Number(caffeine) <= 200) {
-    insights.push("☕ Your caffeine intake is within a healthy range.");
-  } else if (Number(caffeine) <= 400) {
+  } else if (caffeine <= 200) {
+    insights.push(
+      "☕ Your caffeine intake is within a healthy range."
+    );
+  } else if (caffeine <= 400) {
     insights.push(
       "⚠️ You're approaching the recommended daily caffeine limit."
     );
@@ -72,6 +82,23 @@ function Dashboard() {
       "🚫 You've exceeded the recommended daily caffeine intake. Avoid more caffeine today."
     );
   }
+
+  // Energy
+  if (energy >= 80) {
+    insights.push(
+      "🚀 Your energy is excellent. This is a great time for deep work or studying."
+    );
+  } else if (energy >= 50) {
+    insights.push(
+      "🙂 Your energy is moderate. Consider taking a short walk or drinking some water."
+    );
+  } else {
+    insights.push(
+      "⚡ Your energy is low. A short break or nap may help you recharge."
+    );
+  }
+
+} 
 
   // Energy
 
@@ -93,77 +120,88 @@ function Dashboard() {
 
   // ---------------- Focus Time ----------------
 
-  let focusTime = "2 PM – 5 PM";
+  let focusTime = "--";
 
-  if (
-    energy >= 80 &&
-    Number(sleep) >= 8 &&
-    Number(caffeine) <= 200
-  ) {
-    focusTime = "Right now 🚀";
-  } else if (energy >= 60) {
-    focusTime = "Within the next hour";
-  } else if (Number(sleep) < 8) {
-    focusTime = "After a short rest";
-  } else if (Number(caffeine) > 350) {
-    focusTime = "Later today";
-  }
+if (caffeine === "" || sleep === "") {
+  focusTime = "Enter your data";
+} else if (
+  energy >= 80 &&
+  sleep >= 8 &&
+  caffeine <= 200
+) {
+  focusTime = "Right now 🚀";
+} else if (energy >= 60) {
+  focusTime = "Within the next hour";
+} else if (sleep < 8) {
+  focusTime = "After a short rest";
+} else if (caffeine > 350) {
+  focusTime = "Later today";
 
+}
   // ---------------- Save Data ----------------
 
   function saveData() {
-    const now = new Date();
-
-    const newEntry = {
-      date: now.toLocaleDateString(),
-      time: now.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-      caffeine: Number(caffeine),
-      sleep: Number(sleep),
-      energy,
-    };
-
-    localStorage.setItem(
-      "peakData",
-      JSON.stringify({
-        caffeine: Number(caffeine),
-        sleep: Number(sleep),
-        energy,
-      })
+  if (caffeine === "" || sleep === "") {
+    setError(
+      "Please enter both your caffeine intake and sleep before saving."
     );
-
-    const history = JSON.parse(
-      localStorage.getItem("peakHistory") || "[]"
-    );
-
-    history.push(newEntry);
-
-    localStorage.setItem(
-      "peakHistory",
-      JSON.stringify(history)
-    );
-
-    alert("Today's data has been saved!");
+    return;
   }
+
+  setError("");
+
+  const now = new Date();
+
+  const newEntry = {
+    date: now.toLocaleDateString(),
+    time: now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    caffeine,
+    sleep,
+    energy,
+  };
+
+  localStorage.setItem(
+    "peakData",
+    JSON.stringify({
+      caffeine,
+      sleep,
+      energy,
+    })
+  );
+
+  const history = JSON.parse(
+    localStorage.getItem("peakHistory") || "[]"
+  );
+
+  history.push(newEntry);
+
+  localStorage.setItem(
+    "peakHistory",
+    JSON.stringify(history)
+  );
+
+  alert("Today's data has been saved!");
+}
 
   // ---------------- Goals ----------------
 
   const goals = [
-    {
-      name: "Sleep 8+ hours",
-      completed: Number(sleep) >= 8,
-    },
-    {
-      name: "Stay below 400 mg caffeine",
-      completed: Number(caffeine) <= 400,
-    },
-    {
-      name: "Energy above 80%",
-      completed: energy >= 80,
-    },
-  ];
+  {
+    name: "Sleep 8+ hours",
+    completed: sleep !== "" && sleep >= 8,
+  },
+  {
+    name: "Stay below 400 mg caffeine",
+    completed: caffeine !== "" && caffeine <= 400,
+  },
+  {
+    name: "Energy above 80%",
+    completed: energy >= 80,
+  },
+];
 
   const completedGoals = goals.filter(
     (goal) => goal.completed
@@ -181,6 +219,11 @@ function Dashboard() {
         <div className="stat-card">
           <h3>⚡ Energy Score</h3>
           <p>{energy}%</p>
+          {error && (
+  <p className="error-message">
+    {error}
+  </p>
+)}
         </div>
 
         <div className="stat-card">

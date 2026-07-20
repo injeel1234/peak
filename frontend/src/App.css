@@ -581,3 +581,110 @@ button:hover {
 .delete-btn:hover {
   background: #dc2626;
 }
+
+/* Theme Toggle */
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  padding: 12px 18px;
+  margin: 0;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #3b82f6;
+  color: white;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  background: #2563eb;
+}
+
+/* Dark Theme */
+
+body.dark {
+  background: #0f172a;
+  color: white;
+}
+
+/* Light Theme */
+
+body.light {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ===========================
+   Light Theme
+=========================== */
+
+body.light {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* Headings */
+
+body.light h1,
+body.light h2,
+body.light h3 {
+  color: #0f172a;
+}
+
+/* Paragraphs */
+
+body.light p,
+body.light label {
+  color: #334155;
+}
+
+/* Navigation */
+
+body.light .nav-links a {
+  color: #0f172a;
+}
+
+/* Dashboard subtitle */
+
+body.light .dashboard-subtitle,
+body.light .hero p,
+body.light .dashboard > p,
+body.light .step p,
+body.light .cta p,
+body.light .footer,
+body.light .history-subtitle {
+  color: #475569;
+}
+
+/* Cards */
+
+body.light .stat-card,
+body.light .feature-card,
+body.light .dashboard-card,
+body.light .history-card,
+body.light .input-section {
+  background: white;
+  color: #0f172a;
+}
+
+/* Recommendation */
+
+body.light .recommendation {
+  background: #eef2ff;
+}
+
+body.light .recommendation p {
+  color: #334155;
+}
+
+body.light .ai-card h2,
+body.light .ai-card p {
+  color: white;
+}

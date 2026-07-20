@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import "../App.css";
 
 function Dashboard() {
-  const [caffeine, setCaffeine] = useState(180);
-  const [sleep, setSleep] = useState(7.5);
-  const [energy, setEnergy] = useState(87);
+  const [caffeine, setCaffeine] = useState<number | "">("");
+  const [sleep, setSleep] = useState<number | "">("");
+  const [energy, setEnergy] = useState(50);
 
   useEffect(() => {
     const savedData = localStorage.getItem("peakData");
@@ -23,22 +23,31 @@ function Dashboard() {
 
   const insights: string[] = [];
 
-  if (sleep >= 8 && sleep <= 12 && caffeine <= 200 && energy >= 80) {
+  if (
+    Number(sleep) >= 8 &&
+    Number(sleep) <= 12 &&
+    Number(caffeine) <= 200 &&
+    energy >= 80
+  ) {
     insights.push(
       "🌟 Excellent balance! Your sleep, caffeine intake and energy are all in a healthy range."
     );
-  } else if (sleep < 8 && caffeine > 300) {
+  } else if (
+    Number(sleep) < 8 &&
+    Number(caffeine) > 300
+  ) {
     insights.push(
       "⚠️ You're relying on high caffeine despite getting little sleep. Prioritise rest today."
     );
   }
 
   // Sleep
-  if (sleep < 8) {
+
+  if (Number(sleep) < 8) {
     insights.push(
       "😴 You slept less than the recommended amount. Aim for at least 8 hours tonight."
     );
-  } else if (sleep > 12) {
+  } else if (Number(sleep) > 12) {
     insights.push(
       "🛌 More than 12 hours of sleep may indicate fatigue or poor sleep quality."
     );
@@ -47,13 +56,14 @@ function Dashboard() {
   }
 
   // Caffeine
-  if (caffeine === 0) {
+
+  if (Number(caffeine) === 0) {
     insights.push(
       "☕ No caffeine logged today. Great if you're maintaining your energy naturally!"
     );
-  } else if (caffeine <= 200) {
+  } else if (Number(caffeine) <= 200) {
     insights.push("☕ Your caffeine intake is within a healthy range.");
-  } else if (caffeine <= 400) {
+  } else if (Number(caffeine) <= 400) {
     insights.push(
       "⚠️ You're approaching the recommended daily caffeine limit."
     );
@@ -64,6 +74,7 @@ function Dashboard() {
   }
 
   // Energy
+
   if (energy >= 80) {
     insights.push(
       "🚀 Your energy is excellent. This is a great time for deep work or studying."
@@ -84,13 +95,17 @@ function Dashboard() {
 
   let focusTime = "2 PM – 5 PM";
 
-  if (energy >= 80 && sleep >= 8 && caffeine <= 200) {
+  if (
+    energy >= 80 &&
+    Number(sleep) >= 8 &&
+    Number(caffeine) <= 200
+  ) {
     focusTime = "Right now 🚀";
   } else if (energy >= 60) {
     focusTime = "Within the next hour";
-  } else if (sleep < 8) {
+  } else if (Number(sleep) < 8) {
     focusTime = "After a short rest";
-  } else if (caffeine > 350) {
+  } else if (Number(caffeine) > 350) {
     focusTime = "Later today";
   }
 
@@ -105,22 +120,20 @@ function Dashboard() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      caffeine,
-      sleep,
+      caffeine: Number(caffeine),
+      sleep: Number(sleep),
       energy,
     };
 
-    // Save latest values
     localStorage.setItem(
       "peakData",
       JSON.stringify({
-        caffeine,
-        sleep,
+        caffeine: Number(caffeine),
+        sleep: Number(sleep),
         energy,
       })
     );
 
-    // Save history
     const history = JSON.parse(
       localStorage.getItem("peakHistory") || "[]"
     );
@@ -133,26 +146,28 @@ function Dashboard() {
     );
 
     alert("Today's data has been saved!");
-
-    console.log(history);
   }
 
-  const goals = [
-  {
-    name: "Sleep 8+ hours",
-    completed: sleep >= 8,
-  },
-  {
-    name: "Stay below 400 mg caffeine",
-    completed: caffeine <= 400,
-  },
-  {
-    name: "Energy above 80%",
-    completed: energy >= 80,
-  },
-];
+  // ---------------- Goals ----------------
 
-const completedGoals = goals.filter(goal => goal.completed).length;
+  const goals = [
+    {
+      name: "Sleep 8+ hours",
+      completed: Number(sleep) >= 8,
+    },
+    {
+      name: "Stay below 400 mg caffeine",
+      completed: Number(caffeine) <= 400,
+    },
+    {
+      name: "Energy above 80%",
+      completed: energy >= 80,
+    },
+  ];
+
+  const completedGoals = goals.filter(
+    (goal) => goal.completed
+  ).length;
 
   return (
     <main className="dashboard-page">
@@ -170,12 +185,20 @@ const completedGoals = goals.filter(goal => goal.completed).length;
 
         <div className="stat-card">
           <h3>☕ Caffeine</h3>
-          <p>{caffeine} mg</p>
+          <p>
+            {caffeine === ""
+              ? "--"
+              : `${caffeine} mg`}
+          </p>
         </div>
 
         <div className="stat-card">
           <h3>😴 Sleep</h3>
-          <p>{sleep} hours</p>
+          <p>
+            {sleep === ""
+              ? "--"
+              : `${sleep} hours`}
+          </p>
         </div>
 
         <div className="stat-card">
@@ -189,56 +212,75 @@ const completedGoals = goals.filter(goal => goal.completed).length;
         <p>{recommendation}</p>
       </div>
 
-        <div className="goals-card">
-  <h2>🎯 Daily Goals</h2>
+      <div className="goals-card">
+        <h2>🎯 Daily Goals</h2>
 
-  {goals.map((goal, index) => (
-    <p key={index}>
-      {goal.completed ? "✅" : "❌"} {goal.name}
-    </p>
-  ))}
+        {goals.map((goal, index) => (
+          <p key={index}>
+            {goal.completed ? "✅" : "❌"} {goal.name}
+          </p>
+        ))}
 
-  <h3>
-    {completedGoals} / {goals.length} Goals Completed
-  </h3>
-</div>
+        <h3>
+          {completedGoals} / {goals.length} Goals
+          Completed
+        </h3>
+      </div>
 
       <div className="input-section">
         <h2>Update Today's Stats</h2>
 
         <label>Caffeine (mg)</label>
+
         <input
           type="number"
+          min="0"
           placeholder="Enter caffeine (mg)"
-          value={caffeine === 0 ? "" : caffeine}
-          onChange={(e) => setCaffeine(Number(e.target.value) || 0)}
+          value={caffeine}
+          onChange={(e) =>
+            setCaffeine(
+              e.target.value === ""
+                ? ""
+                : Number(e.target.value)
+            )
+          }
         />
 
         <label>Sleep (hours)</label>
+
         <input
           type="number"
+          min="0"
           step="0.5"
           placeholder="Enter sleep (hours)"
-          value={sleep === 0 ? "" : sleep}
-          onChange={(e) => setSleep(Number(e.target.value) || 0)}
+          value={sleep}
+          onChange={(e) =>
+            setSleep(
+              e.target.value === ""
+                ? ""
+                : Number(e.target.value)
+            )
+          }
         />
 
         <label>Energy (%)</label>
+
         <input
           type="range"
           min="0"
           max="100"
           value={energy}
-          onChange={(e) => setEnergy(Number(e.target.value))}
+          onChange={(e) =>
+            setEnergy(Number(e.target.value))
+          }
         />
 
         <p>{energy}%</p>
 
-
         <Link to="/analytics">
-    <button className="analytics-btn">
-     View Analytics
-    </button>
+          <button className="analytics-btn">
+            View Analytics
+          </button>
         </Link>
 
         <div className="button-group">

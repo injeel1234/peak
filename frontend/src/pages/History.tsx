@@ -17,9 +17,23 @@ function History() {
       localStorage.getItem("peakHistory") || "[]"
     );
 
-    // Show newest entries first
-    setHistory(saved.reverse());
+    // Display newest entries first
+    setHistory([...saved].reverse());
   }, []);
+
+  function deleteEntry(indexToDelete: number) {
+    const updatedHistory = history.filter(
+      (_, index) => index !== indexToDelete
+    );
+
+    setHistory(updatedHistory);
+
+    // Save back in chronological order
+    localStorage.setItem(
+      "peakHistory",
+      JSON.stringify([...updatedHistory].reverse())
+    );
+  }
 
   return (
     <main className="history-page">
@@ -34,19 +48,24 @@ function History() {
       ) : (
         history.map((entry, index) => (
           <div className="history-card" key={index}>
-            <h3>📅 {entry.date}</h3>
-
-            <p className="history-time">
+            <h3>
+              📅 {entry.date}
+              <br />
               🕒 {entry.time}
-            </p>
-
-            <hr />
+            </h3>
 
             <p>☕ Caffeine: {entry.caffeine} mg</p>
 
             <p>😴 Sleep: {entry.sleep} hours</p>
 
             <p>⚡ Energy: {entry.energy}%</p>
+
+            <button
+              className="delete-btn"
+              onClick={() => deleteEntry(index)}
+            >
+              Delete
+            </button>
           </div>
         ))
       )}

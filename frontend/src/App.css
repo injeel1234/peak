@@ -571,3 +571,13 @@ button:hover {
   color: #0f172a;
   margin-bottom: 30px;
 }
+
+.delete-btn {
+  margin-top: 20px;
+  background: #ef4444;
+  width: 100%;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}

@@ -137,6 +137,23 @@ function Dashboard() {
     console.log(history);
   }
 
+  const goals = [
+  {
+    name: "Sleep 8+ hours",
+    completed: sleep >= 8,
+  },
+  {
+    name: "Stay below 400 mg caffeine",
+    completed: caffeine <= 400,
+  },
+  {
+    name: "Energy above 80%",
+    completed: energy >= 80,
+  },
+];
+
+const completedGoals = goals.filter(goal => goal.completed).length;
+
   return (
     <main className="dashboard-page">
       <h1>Your Dashboard</h1>
@@ -171,6 +188,20 @@ function Dashboard() {
         <h2>💡 Today's AI Insight</h2>
         <p>{recommendation}</p>
       </div>
+
+        <div className="goals-card">
+  <h2>🎯 Daily Goals</h2>
+
+  {goals.map((goal, index) => (
+    <p key={index}>
+      {goal.completed ? "✅" : "❌"} {goal.name}
+    </p>
+  ))}
+
+  <h3>
+    {completedGoals} / {goals.length} Goals Completed
+  </h3>
+</div>
 
       <div className="input-section">
         <h2>Update Today's Stats</h2>
